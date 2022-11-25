@@ -3,14 +3,20 @@
 makeCacheMatrix <- function(x = matrix()) {
 
   z <- NULL
+  
   dataset <- function(y){
     x <<- y
     z <<- NULL
   }
+  
   getFun <- function()x
+  
   setInverse <- function(inverse) z <<- inverse
+  
   getInverse <- function() z 
-  list(dataset = dataset, getFun = getFun, 
+  
+  list(dataset = dataset, 
+       getFun = getFun, 
        setInverse = setInverse, 
        getInverse = getInverse)
 }
@@ -21,13 +27,20 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
  
   z <- x$getInverse()
+  
   if(!is.null(z)){
+    
     message("processing data")
+  
     return(z)
   }
+  
   mat <- x$get()
+  
   z <- solve(mat,...)
+  
   x$setInverse(z)
+  
   z
   
 }
